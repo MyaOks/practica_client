@@ -26,20 +26,29 @@
               </ul>
 
               <h4>Colors:</h4>
-              <div v-for="variant in variants" :key="variant.variantId">
-               <p @mouseover="updateProduct(variant.variantImage)">
-                   {{ variant.variantColor }}
-               </p>
-            </div>
+              <div
+                     class="color-box"
+                     v-for="variant in variants"
+                     :key="variant.variantId"
+                     :style="{ backgroundColor:variant.variantColor }"
+                     @mouseover="updateProduct(variant.variantImage)"
+               >
+               </div>
 
               <div class="cart">
                  <p>Cart({{ cart }})</p>
               </div>
               
-              <button v-on:click="addToCart">Add to cart</button>
-              <button v-if="cart > 0" v-on:click="delFromCart">Delete from cart</button>
+              <button v-on:click="addToCart" 
+                     :disabled="!inStock"
+                     :class="{ disabledButton: !inStock }"
+               >
+                  Add to cart
+               </button>
           </div>
       </div>
-   </div>   
+   </div>
+   
+   <!-- Привязка классов и стилей -->
 </body>
 </html>
