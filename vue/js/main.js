@@ -9,7 +9,9 @@
             <p v-if="inStock">In stock</p>
             <p v-else>Out of Stock</p>
 
-            <product-details :details="['80% cotton', '20% polyester', 'Gender-neutral']"></product-details>
+            <ul>
+                <li v-for="detail in details">{{ detail }}</li>
+            </ul>
 
             <p>Shipping: {{ shipping }}</p>
 
@@ -21,10 +23,6 @@
                 :style="{ backgroundColor:variant.variantColor }"
                 @mouseover="updateProduct(index)"
             >
-            </div>
-
-            <div class="cart">
-                <p>Cart({{ cart }})</p>
             </div>
               
             <button v-on:click="addToCart" 
@@ -43,6 +41,7 @@
         brand: 'Vue Mastery',
         selectedVariant: 0,
         altText: "A pair of socks",
+        details: ['80% cotton', '20% polyester', 'Gender-neutral'],
         variants: [
             {
                 variantId: 2234,
@@ -57,7 +56,6 @@
                 variantQuantity: 0,
             }
          ],
-         cart: 0,
     }
    },
 
@@ -71,7 +69,7 @@
 
    methods: {
         addToCart() {
-            this.cart += 1
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
         },
 
         updateProduct(index) {
@@ -103,25 +101,18 @@
      }
  })
 
- Vue.component('product-details', {
-    template: `
-    <ul>
-        <li v-for="detail in details">{{ detail }}</li>
-    </ul>
-    `,
-    props: {
-        details: {
-            type: Array,
-            required: true,
-        }
-    },
- })
-
  let app = new Vue({
     el: '#app',
     data: {
         premium: true,
-    }      
+        cart: [],
+    },
+    
+    methods: {
+        updateCart(id) {
+            this.cart.push(id);
+        }
+     }     
  })
 
  
