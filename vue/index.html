@@ -37,6 +37,7 @@
               </div>
               
               <button v-on:click="addToCart">Add to cart</button>
+              <button v-if="cart > 0" v-on:click="delFromCart">Delete from cart</button>
           </div>
       </div>
    </div>   
