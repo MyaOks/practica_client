@@ -31,6 +31,8 @@
             >
                 Add to cart
             </button>
+
+            <button v-on:click="delFromCart">Delete from cart</button>
         </div>
    </div>
    `,
@@ -72,6 +74,10 @@
             this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
         },
 
+        delFromCart() {
+            this.$emit('del-from-cart', this.variants[this.selectedVariant].variantId);
+        },
+
         updateProduct(index) {
             this.selectedVariant = index;
             console.log(index);
@@ -111,6 +117,10 @@
     methods: {
         updateCart(id) {
             this.cart.push(id);
+        },
+
+        deleteCart() {
+            this.cart.pop();
         }
      }     
  })
