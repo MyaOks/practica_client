@@ -9,9 +9,7 @@
             <p v-if="inStock">In stock</p>
             <p v-else>Out of Stock</p>
 
-            <ul>
-                <li v-for="detail in details">{{ detail }}</li>
-            </ul>
+            <product-details :details="['80% cotton', '20% polyester', 'Gender-neutral']"></product-details>
 
             <p>Shipping: {{ shipping }}</p>
 
@@ -45,7 +43,6 @@
         brand: 'Vue Mastery',
         selectedVariant: 0,
         altText: "A pair of socks",
-        details: ['80% cotton', '20% polyester', 'Gender-neutral'],
         variants: [
             {
                 variantId: 2234,
@@ -106,10 +103,24 @@
      }
  })
 
+ Vue.component('product-details', {
+    template: `
+    <ul>
+        <li v-for="detail in details">{{ detail }}</li>
+    </ul>
+    `,
+    props: {
+        details: {
+            type: Array,
+            required: true,
+        }
+    },
+ })
+
  let app = new Vue({
     el: '#app',
     data: {
-        premium: true
+        premium: true,
     }      
  })
 
