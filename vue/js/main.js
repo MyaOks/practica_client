@@ -32,7 +32,12 @@
                 Add to cart
             </button>
 
-            <button v-on:click="delFromCart">Delete from cart</button>
+            <button v-on:click="delFromCart"
+                    :disabled="!inStock"
+                    :class="{ disabledButton: !inStock }"
+            >
+                Delete from cart
+            </button>
         </div>
    </div>
    `,
@@ -119,8 +124,9 @@
             this.cart.push(id);
         },
 
-        deleteCart() {
-            this.cart.pop();
+        deleteCart(id) {
+            let index = this.cart.indexOf(id)
+            this.cart.splice(index, 1)
         }
      }     
  })
