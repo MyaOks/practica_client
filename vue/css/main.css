@@ -91,3 +91,14 @@ textarea {
 .isOutOfStock {
     text-decoration: line-through
 }
+
+.recommend {
+    display: flex;
+    gap: 3vw;
+}
+
+.recommend > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
